@@ -10,9 +10,9 @@ woman	765.16
 world	737.66
 child	690.24
 school	664.83
-# state	642.49
+state	642.49
 family	548.35
-# president	542.10
+president	542.10
 house	540.81
 student	533.92
 part	521.33
@@ -20,10 +20,10 @@ place	512.38
 problem	507.72
 country	502.88
 week	488.24
-# point	487.50
+point	487.50
 hand	484.71
 group	474.28
-# guy	467.34
+guy	467.34
 case	461.60
 question	460.51
 work	459.37

@@ -126,10 +126,12 @@ def levenshteinDistance(a: str, b: str, ipaFeatureMapping: dict, phonemeDistance
 #     return minDist
 
 def generateConlangIpaWords(numSyllables: int):
-    consonants = ["l", "n", "s", "t"] #l, n, s, t
+    consonants = ["l", "n", "s", "t", "k", "v", "b"] #l, n, s, t
     vowels = ["ɑ", "ɛ", "oʊ", "ʌ"] #ah, eh, oh, uh
-    syllables = [["n", "ɑ"], ["n", "ɛ"], ["n", "oʊ"], ["n", "ʌ"], ["l", "ɛ"], ["l", "oʊ"], ["s", "ɑ"], ["s", "oʊ"], ["s", "ʌ"], ["t", "ɑ"], ["t", "ɛ"], ["t", "ʌ"]]
-    numWords = len(syllables)**numSyllables
+    syllables = []
+    for consonant in consonants:
+        for vowel in vowels:
+            syllables.append([consonant, vowel])
 
     words = []
     newWords = []
@@ -161,7 +163,7 @@ if __name__ == "__main__":
 
     minLoss = 10000000000000
     minLossConlangVocab = {}
-    vocabSize = 200
+    vocabSize = 1000
     words = generateConlangIpaWords(1) + generateConlangIpaWords(2) + generateConlangIpaWords(3) + generateConlangIpaWords(4)
     print("Words generated")
     for iter in range(1):

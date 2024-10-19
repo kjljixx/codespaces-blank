@@ -163,12 +163,13 @@ if __name__ == "__main__":
 
     minLoss = 10000000000000
     minLossConlangVocab = {}
-    vocabSize = 1000
+    vocabSize = 10
     words = generateConlangIpaWords(1) + generateConlangIpaWords(2) + generateConlangIpaWords(3) + generateConlangIpaWords(4)
     print("Words generated")
     for iter in range(1):
         wordsSubset = words.copy()
         random.shuffle(wordsSubset)
+        wordsSubset = wordsSubset[:vocabSize*100]
         print("Iter", iter, "Shuffled Words")
         conlangVocab = {}
         loss = 0

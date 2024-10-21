@@ -13,7 +13,7 @@ def search_conlang_vocab(vocab, query):
     return results
 
 ipa_to_conlang_dict = {
-    "l":"l", "n":"n", "s":"s", "t":"t",
+    "l":"l", "n":"n", "s":"s", "t":"t", "k":"k", "v":"v", "b":"b",
     "ɑ":"ah", "ɛ":"eh", "oʊ":"oh", "ʌ":"uh"
 }
 
@@ -30,6 +30,8 @@ def ipa_to_conlang(ipa):
 if __name__ == "__main__":
     vocab_file_path = 'conlangVocab.json'
     conlang_vocab = load_conlang_vocab(vocab_file_path)
+    print("Conlang vocabulary loaded.")
+    print("# of words:", len(conlang_vocab))
     while True:
         user_query = input("Enter a word to search in the conlang vocabulary: ")
         search_results = search_conlang_vocab(conlang_vocab, user_query)

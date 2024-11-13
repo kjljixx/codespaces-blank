@@ -133,7 +133,8 @@ private:
 
     vector<vector<string>> generateConlangIpaWords(int numSyllables) {
         static const vector<string> consonants = {"l", "n", "s", "t", "k", "v", "b"};
-        static const vector<string> vowels = {"ɑ", "ɛ", "oʊ", "ʌ"};
+        static const vector<string> vowels = {"ɑ", "ɛ", "oʊ", "ʌ", "i", "a"};
+        static const vector<vector<string>> languageFunctionSyllables = {{"l", "ɑ"}, {"l", "ʌ"}, {"s", "ɛ"}, {"v", "oʊ"}, {"k", "ɑ"}, {"n", "a"}, {"n", "i"}};
         vector<vector<string>> result;
         
         // Pre-calculate capacity needed
@@ -143,6 +144,12 @@ private:
         if (numSyllables == 1) {
             for (const auto& c : consonants) {
                 for (const auto& v : vowels) {
+                    vector<string> newWord = {c, v};
+
+                    if(count(languageFunctionSyllables.begin(), languageFunctionSyllables.end(), newWord) > 0){
+                        continue;
+                    }
+
                     result.push_back({c, v});
                 }
             }
@@ -152,6 +159,11 @@ private:
                 for (const auto& v : vowels) {
                     for (const auto& subWord : subWords) {
                         vector<string> newWord = {c, v};
+
+                        if(count(languageFunctionSyllables.begin(), languageFunctionSyllables.end(), newWord) > 0){
+                            continue;
+                        }
+
                         newWord.insert(newWord.end(), subWord.begin(), subWord.end());
                         result.push_back(move(newWord));
                     }
@@ -173,7 +185,7 @@ public:
         
         {
             unordered_map<std::string, double> allWordFrequency;
-            ifstream file("test.txt", ios::binary);
+            ifstream file("wordFrequencies.txt", ios::binary);
             file.rdbuf()->pubsetbuf(buffer, BUFFER_SIZE);
             string word;
             double frequency;
@@ -186,7 +198,12 @@ public:
             file2.rdbuf()->pubsetbuf(buffer, BUFFER_SIZE);
             while (file2 >> word) {
                 transform(word.begin(), word.end(), word.begin(), ::toupper);
-                wordFrequency[move(word)] = allWordFrequency[word];
+                if(allWordFrequency.count(word)){
+                    wordFrequency[move(word)] = allWordFrequency[word];
+                }
+                else{
+                    wordFrequency[move(word)] = 0;
+                }
             }
         }
         
@@ -267,7 +284,7 @@ public:
 
         // Save vocabulary to JSON file
         json output(conlangVocab);
-        ofstream outFile("conlangVocabNew.json");
+        ofstream outFile("conlangVocab.json");
         outFile << output.dump(4);
     }
 
@@ -283,7 +300,7 @@ public:
 
 int main() {
     try {
-        ConlangGenerator generator(400);
+        ConlangGenerator generator(600);
         generator.loadData();
         generator.generate();
     } catch (const exception& e) {

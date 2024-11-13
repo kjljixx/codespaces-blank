@@ -14,7 +14,7 @@ def search_conlang_vocab(vocab, query):
 
 ipa_to_conlang_dict = {
     "l":"l", "n":"n", "s":"s", "t":"t", "k":"k", "v":"v", "b":"b",
-    "ɑ":"ah", "ɛ":"eh", "oʊ":"oh", "ʌ":"uh"
+    "ɑ":"aw", "ɛ":"eh", "oʊ":"oh", "ʌ":"uh", "i":"ee", "a":"aah"
 }
 
 def ipa_to_conlang(ipa):

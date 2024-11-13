@@ -1,0 +1,4 @@
+act, (Object) Something done (a deed), (Property) Something done by its Owner
+end, (Object) The terminal point of something in space or time, (Property) The terminal point of its Owner in space or time
+past, (Property) A list of acts/actions finished before the time of writing/speaking by its Owner
+in, (Property) A list of objects which are enclosed/surrounded by its Owner in space or time 
